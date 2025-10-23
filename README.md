@@ -148,6 +148,15 @@ npm run preview
 
 ## Deployment
 
+### Deployment Examples
+
+Ready-to-use configuration files are available in the `docs/deployment-examples/` directory:
+- `netlify.toml` - Netlify configuration
+- `nginx.conf` - Nginx server configuration with optimizations
+- `.htaccess` - Apache configuration
+- `Dockerfile` - Multi-stage Docker build
+- `docker-nginx.conf` - Nginx configuration for Docker
+
 ### Deploy to Vercel (Recommended)
 
 Vercel offers free hosting with automatic deployments:
@@ -180,7 +189,7 @@ Vercel offers free hosting with automatic deployments:
 
 1. **Sign up** at [netlify.com](https://netlify.com)
 
-2. **Create a `netlify.toml` file** in the root:
+2. **Create a `netlify.toml` file** in the root (see `docs/deployment-examples/netlify.toml` for a ready-to-use example):
    ```toml
    [build]
      command = "npm run build"
@@ -205,7 +214,7 @@ Vercel offers free hosting with automatic deployments:
 
 3. **Web Server Configuration**:
 
-   **For Nginx**, add this to your site configuration:
+   **For Nginx**, add this to your site configuration (see `docs/deployment-examples/nginx.conf` for a complete example):
    ```nginx
    server {
        listen 80;
@@ -219,7 +228,7 @@ Vercel offers free hosting with automatic deployments:
    }
    ```
 
-   **For Apache**, create a `.htaccess` file in the `dist/` directory:
+   **For Apache**, create a `.htaccess` file in the `dist/` directory (see `docs/deployment-examples/.htaccess` for a complete example):
    ```apache
    <IfModule mod_rewrite.c>
        RewriteEngine On
@@ -242,7 +251,9 @@ Vercel offers free hosting with automatic deployments:
 
 ### Deploy with Docker
 
-1. **Create a `Dockerfile`** in the root:
+A complete Docker setup is available in `docs/deployment-examples/`. Here's a quick start:
+
+1. **Create a `Dockerfile`** in the root (or copy from `docs/deployment-examples/Dockerfile`):
    ```dockerfile
    FROM node:18-alpine as build
    WORKDIR /app
@@ -253,26 +264,12 @@ Vercel offers free hosting with automatic deployments:
 
    FROM nginx:alpine
    COPY --from=build /app/dist /usr/share/nginx/html
-   COPY nginx.conf /etc/nginx/conf.d/default.conf
+   COPY docs/deployment-examples/docker-nginx.conf /etc/nginx/conf.d/default.conf
    EXPOSE 80
    CMD ["nginx", "-g", "daemon off;"]
    ```
 
-2. **Create `nginx.conf`**:
-   ```nginx
-   server {
-       listen 80;
-       server_name localhost;
-       root /usr/share/nginx/html;
-       index index.html;
-
-       location / {
-           try_files $uri $uri/ /index.html;
-       }
-   }
-   ```
-
-3. **Build and run**:
+2. **Build and run**:
    ```bash
    docker build -t research-website .
    docker run -p 80:80 research-website
@@ -293,7 +290,7 @@ export default defineConfig({
 
 ### Environment Variables
 
-Create a `.env` file in the root for environment-specific settings:
+Create a `.env` file in the root for environment-specific settings (see `.env.example` for reference):
 
 ```env
 VITE_SITE_TITLE=Your Research Group
@@ -304,6 +301,8 @@ Access them in your code:
 ```typescript
 const title = import.meta.env.VITE_SITE_TITLE
 ```
+
+**Note**: Environment variables must start with `VITE_` to be accessible in the application.
 
 ### Routing
 

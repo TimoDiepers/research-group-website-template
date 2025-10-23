@@ -16,7 +16,6 @@ const navItems = [
 export function SiteHeader() {
   const location = useLocation()
   const [hovered, setHovered] = useState<string | null>(null)
-  const [mobileHovered, setMobileHovered] = useState<string | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleMouseLeave = () => {
@@ -36,7 +35,6 @@ export function SiteHeader() {
 
   useEffect(() => {
     setMobileOpen(false)
-    setMobileHovered(null)
   }, [location.pathname])
 
   return (
@@ -104,34 +102,19 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="md:hidden">
-          <motion.button
+          <button
             type="button"
             onClick={() => setMobileOpen((open) => !open)}
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
             className="flex h-10 w-10 items-center justify-center"
-            whileTap={{ scale: 0.95 }}
           >
             <div className="relative h-6 w-6">
-              <motion.span
-                className="absolute left-1/2 top-1 h-0.5 w-5 -translate-x-1/2 rounded-full bg-foreground"
-                style={{ originX: 0.5, originY: 0.5 }}
-                animate={mobileOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-              />
-              <motion.span
-                className="absolute left-1/2 top-1/2 h-0.5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground"
-                animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-                transition={{ duration: 0.2 }}
-              />
-              <motion.span
-                className="absolute bottom-1 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-foreground"
-                style={{ originX: 0.5, originY: 0.5 }}
-                animate={mobileOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-              />
+              <span className="absolute left-1/2 top-1 h-0.5 w-5 -translate-x-1/2 rounded-full bg-foreground" />
+              <span className="absolute left-1/2 top-1/2 h-0.5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground" />
+              <span className="absolute bottom-1 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full bg-foreground" />
             </div>
-          </motion.button>
+          </button>
         </div>
         <div className="hidden items-center gap-2 md:flex">
           <Button variant="secondary" asChild>
@@ -173,28 +156,6 @@ export function SiteHeader() {
             transition={{ duration: 0.24, ease: 'easeOut' }}
             className="absolute inset-y-0 right-0 flex w-[min(20rem,90vw)] flex-col gap-6 border-l border-border/60 bg-background/90 px-6 py-6 shadow-2xl backdrop-blur supports-[backdrop-filter]:bg-background/80"
           >
-            <div className="flex justify-between">
-              <motion.button
-                type="button"
-                aria-label="Close navigation menu"
-                onClick={() => setMobileOpen(false)}
-                className="flex h-10 w-10 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="relative h-6 w-6">
-                  <motion.span
-                    className="absolute left-1/2 top-1/2 h-0.5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground"
-                    animate={{ rotate: 45 }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
-                  />
-                  <motion.span
-                    className="absolute left-1/2 top-1/2 h-0.5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground"
-                    animate={{ rotate: -45 }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
-                  />
-                </div>
-              </motion.button>
-            </div>
             <nav className="flex flex-col gap-2 text-lg font-medium">
             {navItems.map((item) => (
               <NavLink
@@ -202,22 +163,10 @@ export function SiteHeader() {
                 to={item.to}
                 onClick={() => setMobileOpen(false)}
                 className="relative inline-flex items-center rounded-lg px-4 py-3"
-                onMouseEnter={() => setMobileHovered(item.to)}
-                onMouseLeave={() => setMobileHovered(null)}
-                onFocus={() => setMobileHovered(item.to)}
-                onBlur={() => setMobileHovered(null)}
               >
                 {({ isActive }) => {
-                  const highlight = mobileHovered ?? (isActive ? item.to : null)
                   return (
                     <>
-                      {highlight === item.to && (
-                        <motion.span
-                          layoutId="nav-highlight-mobile"
-                          className="absolute inset-0 -z-10 rounded-lg bg-secondary/90 shadow-sm"
-                          transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-                        />
-                      )}
                       <span
                         className={cn(
                           'relative z-10 transition-colors',

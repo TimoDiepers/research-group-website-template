@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import { motion, useInView } from 'motion/react'
+import { motion } from 'motion/react'
 import { researchAreas } from '../data/research'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
@@ -9,24 +9,13 @@ import { Button } from '../components/ui/button'
 
 export function ResearchOverviewPage() {
   const [heroReady, setHeroReady] = useState(false)
-  const areasSectionRef = useRef<HTMLDivElement | null>(null)
-  const areasVisible = useInView(areasSectionRef, {
-    once: true,
-    margin: '-20% 0px -20% 0px',
-    amount: 0.2,
-  })
 
   useEffect(() => {
     setHeroReady(true)
   }, [])
 
   return (
-    <motion.div
-      className="container py-16"
-      initial={{ opacity: 0, y: 32 }}
-      animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-    >
+    <div className="container py-16">
       <motion.div
         className="space-y-4"
         initial={{ opacity: 0, y: 24 }}
@@ -45,18 +34,13 @@ export function ResearchOverviewPage() {
         </p>
       </motion.div>
 
-      <motion.div
-        ref={areasSectionRef}
-        className="mt-16 grid gap-8"
-        initial={{ opacity: 0, y: 36 }}
-        animate={areasVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-      >
+      <div className="mt-16 grid gap-8">
         {researchAreas.map((area, index) => (
           <motion.div
             key={area.slug}
-            initial={{ opacity: 0, y: 36 }}
-            animate={areasVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.08 }}
           >
             <Card className="overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
@@ -111,7 +95,7 @@ export function ResearchOverviewPage() {
             </Card>
           </motion.div>
         ))}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }

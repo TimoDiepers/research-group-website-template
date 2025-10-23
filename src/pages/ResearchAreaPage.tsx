@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react'
-import { motion, useInView } from 'motion/react'
+import { motion } from 'motion/react'
 import { researchAreas } from '../data/research'
 import { Badge } from '../components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
@@ -12,12 +12,6 @@ export function ResearchAreaPage() {
   const { slug } = useParams<{ slug: string }>()
   const area = researchAreas.find((item) => item.slug === slug)
   const [heroReady, setHeroReady] = useState(false)
-  const detailsSectionRef = useRef<HTMLElement | null>(null)
-  const detailsVisible = useInView(detailsSectionRef, {
-    once: true,
-    margin: '-20% 0px -20% 0px',
-    amount: 0.2,
-  })
 
   useEffect(() => {
     setHeroReady(true)
@@ -74,14 +68,14 @@ export function ResearchAreaPage() {
           </CardContent>
         </Card>
       </motion.section>
-      <motion.section
-        ref={detailsSectionRef}
-        className="container grid gap-10 md:grid-cols-[1.1fr_0.9fr]"
-        initial={{ opacity: 0, y: 36 }}
-        animate={detailsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-      >
-        <Card className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+      <section className="container grid gap-10 md:grid-cols-[1.1fr_0.9fr]">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <Card className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
           <CardHeader>
             <CardTitle>Featured projects</CardTitle>
             <CardDescription>
@@ -111,8 +105,15 @@ export function ResearchAreaPage() {
               </div>
             ))}
           </CardContent>
-        </Card>
-        <Card className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+          </Card>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+        >
+          <Card className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
           <CardHeader>
             <CardTitle>Collaborator network</CardTitle>
             <CardDescription>
@@ -143,8 +144,9 @@ export function ResearchAreaPage() {
               </Button>
             </div>
           </CardContent>
-        </Card>
-      </motion.section>
+          </Card>
+        </motion.div>
+      </section>
     </div>
   )
 }

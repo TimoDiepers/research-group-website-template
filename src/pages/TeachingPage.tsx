@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CalendarClock, GraduationCap, NotebookPen, UsersRound } from 'lucide-react'
-import { motion, useInView } from 'motion/react'
+import { motion } from 'motion/react'
 import { courses, outreach } from '../data/teaching'
 import { Badge } from '../components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
@@ -8,12 +8,6 @@ import { Button } from '../components/ui/button'
 
 export function TeachingPage() {
   const [heroReady, setHeroReady] = useState(false)
-  const experiencesSectionRef = useRef<HTMLElement | null>(null)
-  const experiencesVisible = useInView(experiencesSectionRef, {
-    once: true,
-    margin: '-20% 0px -20% 0px',
-    amount: 0.2,
-  })
 
   useEffect(() => {
     setHeroReady(true)
@@ -39,14 +33,14 @@ export function TeachingPage() {
         </p>
       </motion.section>
 
-      <motion.section
-        ref={experiencesSectionRef}
-        className="container mt-12 grid gap-6 md:grid-cols-[1.1fr_0.9fr]"
-        initial={{ opacity: 0, y: 36 }}
-        animate={experiencesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-      >
-        <Card className="h-full border-primary/40 bg-primary/5 transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+      <section className="container mt-12 grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <Card className="h-full border-primary/40 bg-primary/5 transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-foreground">
               <GraduationCap className="h-5 w-5 text-primary" />
@@ -64,8 +58,15 @@ export function TeachingPage() {
               Students work in multidisciplinary teams and receive mentorship from lab researchers and external partners.
             </p>
           </CardContent>
-        </Card>
-        <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+          </Card>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+        >
+          <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <CalendarClock className="h-5 w-5 text-primary" />
@@ -86,21 +87,22 @@ export function TeachingPage() {
               • Apr 18: Student capstone showcase with civic partners
             </p>
           </CardContent>
-        </Card>
-      </motion.section>
+          </Card>
+        </motion.div>
+      </section>
 
       <motion.section
         className="container mt-16 space-y-10"
         initial={{ opacity: 0, y: 36 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 'some' }}
+        viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
       >
         <motion.header
           className="max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 'some' }}
+          viewport={{ once: true, amount: 0.35 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
           <Badge variant="outline">Courses</Badge>
@@ -117,7 +119,7 @@ export function TeachingPage() {
               key={course.code}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 'some' }}
+              viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.55, ease: 'easeOut', delay: index * 0.08 }}
             >
               <Card className="flex h-full flex-col justify-between border-border bg-background/95 transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
@@ -163,7 +165,7 @@ export function TeachingPage() {
         className="bg-muted/30 py-16"
         initial={{ opacity: 0, y: 36 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 'some' }}
+        viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
       >
         <div className="container grid gap-8 md:grid-cols-[0.7fr_1.3fr]">
@@ -171,7 +173,7 @@ export function TeachingPage() {
             className="space-y-3"
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 'some' }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <Badge variant="outline">Outreach & clinics</Badge>
@@ -192,7 +194,7 @@ export function TeachingPage() {
                 key={item.title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 'some' }}
+                viewport={{ once: true, amount: 0.35 }}
                 transition={{ duration: 0.55, ease: 'easeOut', delay: index * 0.08 }}
               >
                 <Card className="transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">

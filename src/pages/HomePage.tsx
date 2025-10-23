@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, ArrowUpRight, BookOpen, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { motion, useInView } from 'motion/react'
+import { motion } from 'motion/react'
 import { researchAreas } from '../data/research'
 import { Button } from '../components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
@@ -31,12 +31,6 @@ const updates = [
 
 export function HomePage() {
   const [heroReady, setHeroReady] = useState(false)
-  const researchProgramsRef = useRef<HTMLElement | null>(null)
-  const researchProgramsVisible = useInView(researchProgramsRef, {
-    once: true,
-    margin: '-20% 0px -20% 0px',
-    amount: 0.2,
-  })
 
   useEffect(() => {
     setHeroReady(true)
@@ -89,8 +83,12 @@ export function HomePage() {
             ))}
           </div>
         </div>
-        <div
-          className="flex flex-1 flex-col gap-4 rounded-lg border border-border bg-card/80 p-6 shadow-soft backdrop-blur transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft/70"
+        <motion.div
+          className="flex flex-1 flex-col gap-4 rounded-lg border border-border bg-card/80 p-6 shadow-soft backdrop-blur hover:shadow-soft/80"
+          initial={{ opacity: 0, y: 24 }}
+          animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          whileHover={{ y: -8 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
         >
           <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             <Sparkles className="h-4 w-4 text-accent" />
@@ -111,17 +109,17 @@ export function HomePage() {
               <ArrowUpRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-        </div>
+        </motion.div>
       </motion.section>
 
-      <motion.section
-        ref={researchProgramsRef}
-        className="container py-16"
-        initial={{ opacity: 0, y: 40 }}
-        animate={researchProgramsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-      >
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className="container py-16">
+        <motion.div
+          className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           <div>
             <Badge variant="outline">Research Programs</Badge>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -137,13 +135,14 @@ export function HomePage() {
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
-        </div>
+        </motion.div>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {researchAreas.map((area, index) => (
             <motion.div
               key={area.slug}
-              initial={{ opacity: 0, y: 32 }}
-              animate={researchProgramsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.65, ease: 'easeOut', delay: index * 0.1 }}
             >
               <Card className="group relative overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
@@ -173,21 +172,15 @@ export function HomePage() {
             </motion.div>
           ))}
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section
-        className="bg-muted/30 py-16"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 'some' }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-      >
+      <section className="bg-muted/30 py-16">
         <div className="container grid gap-10 md:grid-cols-2 md:items-center">
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 'some' }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <Badge variant="outline">Collaboration</Badge>
@@ -216,7 +209,7 @@ export function HomePage() {
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 'some' }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
           >
             <Card className="shadow-soft transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft/80">
@@ -240,7 +233,7 @@ export function HomePage() {
             </Card>
           </motion.div>
         </div>
-      </motion.section>
+      </section>
     </div>
   )
 }

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GraduationCap, MapPin, Send, Users2 } from 'lucide-react'
-import { motion, useInView } from 'motion/react'
+import { motion } from 'motion/react'
 import { faculty, researchers, staff, type TeamMember } from '../data/team'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
@@ -21,7 +21,7 @@ function TeamGrid({
       className="space-y-6"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 'some' }}
+      viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
     >
       <div>
@@ -34,7 +34,7 @@ function TeamGrid({
             key={member.name}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 'some' }}
+            viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.04 }}
           >
             <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
@@ -71,12 +71,6 @@ function TeamGrid({
 
 export function TeamPage() {
   const [heroReady, setHeroReady] = useState(false)
-  const cultureSectionRef = useRef<HTMLElement | null>(null)
-  const cultureVisible = useInView(cultureSectionRef, {
-    once: true,
-    margin: '-20% 0px -20% 0px',
-    amount: 0.2,
-  })
 
   useEffect(() => {
     setHeroReady(true)
@@ -102,14 +96,14 @@ export function TeamPage() {
         </p>
       </motion.section>
 
-      <motion.section
-        ref={cultureSectionRef}
-        className="container mt-12 grid gap-6 md:grid-cols-[0.8fr_1.2fr]"
-        initial={{ opacity: 0, y: 36 }}
-        animate={cultureVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 36 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-      >
-        <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+      <section className="container mt-12 grid gap-6 md:grid-cols-[0.8fr_1.2fr]">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Users2 className="h-5 w-5 text-primary" />
@@ -135,8 +129,15 @@ export function TeamPage() {
               </li>
             </ul>
           </CardContent>
-        </Card>
-        <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+          </Card>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+        >
+          <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <GraduationCap className="h-5 w-5 text-primary" />
@@ -154,15 +155,16 @@ export function TeamPage() {
               Graduate researchers co-advise undergraduate fellows, while faculty host monthly reflective practice sessions.
             </p>
           </CardContent>
-        </Card>
-      </motion.section>
+          </Card>
+        </motion.div>
+      </section>
 
       <motion.section
         id="openings"
         className="container mt-12"
         initial={{ opacity: 0, y: 32 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 'some' }}
+      viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.65, ease: 'easeOut' }}
       >
         <Card className="border-dashed border-primary/50 bg-primary/5 transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
@@ -197,7 +199,7 @@ export function TeamPage() {
         className="container mt-16 space-y-16"
         initial={{ opacity: 0, y: 36 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 'some' }}
+        viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
       >
         <TeamGrid

@@ -4,6 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { Button } from '../ui/button'
 import { cn } from '../../lib/utils'
+import { ThemeToggle } from '../theme/ThemeToggle'
 
 const navItems = [
   { to: '/', label: 'Overview' },
@@ -133,10 +134,7 @@ export function SiteHeader() {
           </motion.button>
         </div>
         <div className="hidden items-center gap-2 md:flex">
-          <Button
-            variant="secondary"
-            asChild
-          >
+          <Button variant="secondary" asChild>
             <NavLink to="/teaching">
               <GraduationCap className="h-4 w-4" />
               Learn with us
@@ -148,6 +146,7 @@ export function SiteHeader() {
               Meet the team
             </NavLink>
           </Button>
+          <ThemeToggle />
         </div>
       </div>
     </header>
@@ -155,13 +154,48 @@ export function SiteHeader() {
       {mobileOpen && (
         <motion.div
           key="mobile-nav"
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-border/70 bg-background/95 px-6 py-6 backdrop-blur supports-[backdrop-filter]:bg-background/75 md.hidden"
+          className="fixed inset-0 z-40 md:hidden"
         >
-          <nav className="flex flex-col gap-2 text-lg font-medium">
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            className="absolute inset-0 h-full w-full bg-black/30"
+            onClick={() => setMobileOpen(false)}
+          />
+          <motion.aside
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.24, ease: 'easeOut' }}
+            className="absolute inset-y-0 right-0 flex w-[min(20rem,90vw)] flex-col gap-6 border-l border-border/60 bg-background/90 px-6 py-6 shadow-2xl backdrop-blur supports-[backdrop-filter]:bg-background/80"
+          >
+            <div className="flex justify-between">
+              <motion.button
+                type="button"
+                aria-label="Close navigation menu"
+                onClick={() => setMobileOpen(false)}
+                className="flex h-10 w-10 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+                whileTap={{ scale: 0.95 }}
+              >
+                <div className="relative h-6 w-6">
+                  <motion.span
+                    className="absolute left-1/2 top-1/2 h-0.5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground"
+                    animate={{ rotate: 45 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                  />
+                  <motion.span
+                    className="absolute left-1/2 top-1/2 h-0.5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-foreground"
+                    animate={{ rotate: -45 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                  />
+                </div>
+              </motion.button>
+            </div>
+            <nav className="flex flex-col gap-2 text-lg font-medium">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -212,7 +246,11 @@ export function SiteHeader() {
             <Button variant="outline" className="gap-2" asChild>
               <NavLink to="/team">Meet the team</NavLink>
             </Button>
+            <div className="flex justify-start">
+              <ThemeToggle />
+            </div>
           </div>
+          </motion.aside>
         </motion.div>
       )}
     </AnimatePresence>

@@ -5,6 +5,24 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>research-group-website</title>
+    <script>
+      ;(() => {
+        const storageKey = 'theme-preference'
+        let stored = null
+        try {
+          stored = localStorage.getItem(storageKey)
+        } catch (error) {
+          stored = null
+        }
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const resolved = stored === 'dark' || (stored !== 'light' && prefersDark)
+        if (resolved) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -7,6 +7,7 @@ import { Badge } from '../components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { Separator } from '../components/ui/separator'
+import { heroAnimations, scrollFadeIn } from '../lib/animations'
 
 export function ResearchAreaPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -25,9 +26,9 @@ export function ResearchAreaPage() {
     <div className="bg-muted/30 pb-16">
       <motion.section
         className="container space-y-6 pb-16 pt-12"
-        initial={{ opacity: 0, y: 32 }}
-        animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
-        transition={{ duration: 0.65, ease: 'easeOut' }}
+        initial={heroAnimations.initial}
+        animate={heroReady ? heroAnimations.animate : heroAnimations.initial}
+        transition={heroAnimations.transition}
       >
         <Button variant="ghost" className="w-fit px-0" asChild>
           <Link to="/research">
@@ -70,10 +71,7 @@ export function ResearchAreaPage() {
       </motion.section>
       <section className="container grid gap-10 md:grid-cols-[1.1fr_0.9fr]">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          {...scrollFadeIn}
         >
           <Card className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
           <CardHeader>
@@ -108,10 +106,8 @@ export function ResearchAreaPage() {
           </Card>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+          {...scrollFadeIn}
+          transition={{ ...scrollFadeIn.transition, delay: 0.1 }}
         >
           <Card className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
           <CardHeader>

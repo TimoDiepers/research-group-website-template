@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ExternalLink } from 'lucide-react'
 import { motion } from 'motion/react'
 import { researchAreas } from '../data/research'
+import { publications } from '../data/publications'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { Button } from '../components/ui/button'
@@ -96,6 +97,70 @@ export function ResearchOverviewPage() {
           </motion.div>
         ))}
       </div>
+
+      <motion.div
+        className="mt-24"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.35 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground">Recent Publications</h2>
+            <p className="mt-2 text-muted-foreground">
+              Explore our latest research contributions across journals, conferences, and preprints
+            </p>
+          </div>
+          <Button asChild className="sm:shrink-0">
+            <Link to="/publications">
+              View all publications
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+        
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {publications.slice(0, 3).map((pub, index) => (
+            <motion.div
+              key={pub.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
+            >
+              <Card className="h-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+                <CardHeader>
+                  <div className="mb-2 flex items-center gap-2">
+                    <Badge variant="secondary" className="text-xs">
+                      {pub.type}
+                    </Badge>
+                    <span className="text-xs text-muted-foreground">{pub.year}</span>
+                  </div>
+                  <CardTitle className="line-clamp-2 text-lg font-semibold leading-tight">
+                    {pub.title}
+                  </CardTitle>
+                  <CardDescription className="text-xs">
+                    {pub.authors.slice(0, 3).join(', ')}
+                    {pub.authors.length > 3 && ' et al.'}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4 text-sm font-medium text-muted-foreground">{pub.venue}</p>
+                  {pub.link && (
+                    <Button variant="ghost" size="sm" asChild className="w-full">
+                      <a href={pub.link} target="_blank" rel="noopener noreferrer">
+                        Read paper
+                        <ExternalLink className="ml-2 h-3 w-3" />
+                      </a>
+                    </Button>
+                  )}
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   )
 }

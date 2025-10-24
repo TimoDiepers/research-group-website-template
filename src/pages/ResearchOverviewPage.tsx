@@ -105,14 +105,14 @@ export function ResearchOverviewPage() {
         viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-foreground">Recent Publications</h2>
             <p className="mt-2 text-muted-foreground">
               Explore our latest research contributions across journals, conferences, and preprints
             </p>
           </div>
-          <Button asChild>
+          <Button asChild className="sm:shrink-0">
             <Link to="/publications">
               View all publications
               <ArrowRight className="ml-2 h-4 w-4" />

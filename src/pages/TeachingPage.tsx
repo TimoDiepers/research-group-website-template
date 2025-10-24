@@ -44,7 +44,7 @@ export function TeachingPage() {
         <motion.div
           {...scrollFadeIn}
         >
-          <Card className="h-full border-primary/40 bg-primary/5 transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+          <Card className="h-full border-primary/40 bg-primary/5 card-hover-secondary">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-foreground">
               <GraduationCap className="h-5 w-5 text-primary" />
@@ -68,7 +68,7 @@ export function TeachingPage() {
           {...scrollFadeIn}
           transition={{ ...scrollFadeIn.transition, delay: 0.1 }}
         >
-          <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+          <Card className="h-full card-hover-secondary">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <CalendarClock className="h-5 w-5 text-primary" />
@@ -115,7 +115,7 @@ export function TeachingPage() {
               key={course.code}
               {...cardAnimation(index)}
             >
-              <Card className="flex h-full flex-col justify-between border-border bg-background/95 transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+              <Card className="flex h-full flex-col justify-between border-border bg-background/95 card-hover-primary">
                 <CardHeader>
                   <div className="flex items-center justify-between gap-4">
                     <Badge variant="accent">{course.code}</Badge>
@@ -137,7 +137,7 @@ export function TeachingPage() {
                     {course.highlights.map((highlight) => (
                       <li
                         key={highlight}
-                        className="flex gap-3 rounded-md border border-border/80 bg-muted/30 p-3 transition-transform duration-300 hover:-translate-y-1 hover:border-primary/40"
+                        className="flex gap-3 list-item-box"
                       >
                         <NotebookPen className="mt-1 h-4 w-4 text-primary" />
                         <span>{highlight}</span>
@@ -181,7 +181,7 @@ export function TeachingPage() {
                 key={item.title}
                 {...cardAnimation(index)}
               >
-                <Card className="transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+                <Card className="card-hover-secondary">
                   <CardHeader>
                     <CardTitle className="text-lg font-semibold">{item.title}</CardTitle>
                   </CardHeader>

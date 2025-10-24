@@ -37,7 +37,7 @@ function TeamGrid({
             key={member.name}
             {...cardAnimation(index)}
           >
-            <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+            <Card className="h-full card-hover-secondary">
               <CardContent className="flex h-full flex-col gap-4 p-6">
                 <div className="flex items-center gap-3">
                   <Avatar>
@@ -100,7 +100,7 @@ export function TeamPage() {
         <motion.div
           {...scrollFadeIn}
         >
-          <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+          <Card className="h-full card-hover-secondary">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Users2 className="h-5 w-5 text-primary" />
@@ -115,13 +115,13 @@ export function TeamPage() {
               We foster a studio environment where faculty, students, and partners co-design research questions and iterate on solutions together.
             </p>
             <ul className="space-y-3">
-              <li className="rounded-lg border border-border bg-background p-3">
+              <li className="list-item-box-solid">
                 <strong className="text-foreground">Shared rigor:</strong> Pairing empirical depth with reflective critique.
               </li>
-              <li className="rounded-lg border border-border bg-background p-3">
+              <li className="list-item-box-solid">
                 <strong className="text-foreground">Open tooling:</strong> Default to open-source releases and transparent documentation.
               </li>
-              <li className="rounded-lg border border-border bg-background p-3">
+              <li className="list-item-box-solid">
                 <strong className="text-foreground">Care work:</strong> Dedicated mentorship, peer coaching, and inclusive lab operations.
               </li>
             </ul>
@@ -132,7 +132,7 @@ export function TeamPage() {
           {...scrollFadeIn}
           transition={{ ...scrollFadeIn.transition, delay: 0.1 }}
         >
-          <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+          <Card className="h-full card-hover-secondary">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <GraduationCap className="h-5 w-5 text-primary" />
@@ -159,7 +159,7 @@ export function TeamPage() {
         className="container mt-12"
         {...scrollFadeIn}
       >
-        <Card className="border-dashed border-primary/50 bg-primary/5 transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
+        <Card className="border-dashed border-primary/50 bg-primary/5 card-hover-secondary">
           <CardContent className="flex flex-col gap-6 p-8 md:flex-row md:items-center md:justify-between">
             <div className="space-y-2">
               <h2 className="text-2xl font-semibold text-foreground">

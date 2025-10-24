@@ -17,6 +17,14 @@ const badgeVariants = cva(
         accent:
           "border-transparent bg-accent text-accent-foreground shadow hover:bg-accent/85",
         outline: "text-foreground",
+        journal:
+          "border-transparent bg-blue-500/10 text-blue-700 dark:text-blue-400",
+        conference:
+          "border-transparent bg-green-500/10 text-green-700 dark:text-green-400",
+        preprint:
+          "border-transparent bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
+        book:
+          "border-transparent bg-purple-500/10 text-purple-700 dark:text-purple-400",
       },
     },
     defaultVariants: {

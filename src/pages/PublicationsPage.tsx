@@ -26,18 +26,18 @@ export function PublicationsPage() {
     .map(Number)
     .sort((a, b) => b - a)
 
-  const getPublicationTypeColor = (type: string) => {
+  const getPublicationTypeVariant = (type: string): "journal" | "conference" | "preprint" | "book" | "default" => {
     switch (type) {
       case 'journal':
-        return 'bg-blue-500/10 text-blue-700 dark:text-blue-400'
+        return 'journal'
       case 'conference':
-        return 'bg-green-500/10 text-green-700 dark:text-green-400'
+        return 'conference'
       case 'preprint':
-        return 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400'
+        return 'preprint'
       case 'book':
-        return 'bg-purple-500/10 text-purple-700 dark:text-purple-400'
+        return 'book'
       default:
-        return ''
+        return 'default'
     }
   }
 
@@ -80,12 +80,12 @@ export function PublicationsPage() {
                   viewport={{ once: true, amount: 0.35 }}
                   transition={{ duration: 0.5, ease: 'easeOut', delay: pubIndex * 0.05 }}
                 >
-                  <Card className="overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+                  <Card className="overflow-hidden card-hover-primary">
                     <CardHeader>
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1 space-y-2">
                           <div className="flex items-center gap-2">
-                            <Badge className={getPublicationTypeColor(pub.type)}>
+                            <Badge variant={getPublicationTypeVariant(pub.type)}>
                               {pub.type}
                             </Badge>
                             {pub.tags && pub.tags.slice(0, 2).map((tag) => (

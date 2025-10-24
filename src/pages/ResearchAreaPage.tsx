@@ -45,7 +45,7 @@ export function ResearchAreaPage() {
           </h1>
           <p className="text-lg text-muted-foreground">{area.summary}</p>
         </div>
-        <Card className="shadow-soft transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft/80">
+        <Card className="shadow-soft card-hover-subtle">
           <CardHeader>
             <CardTitle>Program pillars</CardTitle>
             <CardDescription>
@@ -56,7 +56,7 @@ export function ResearchAreaPage() {
             {area.highlights.map((highlight) => (
               <div
                 key={highlight}
-                className="space-y-2 rounded-lg border border-border bg-background p-4 transition-transform duration-300 hover:-translate-y-1 hover:border-primary/40"
+                className="space-y-2 feature-box-muted"
               >
                 <h3 className="text-base font-semibold text-foreground">
                   {highlight.split(':')[0]}
@@ -73,7 +73,7 @@ export function ResearchAreaPage() {
         <motion.div
           {...scrollFadeIn}
         >
-          <Card className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+          <Card className="card-hover-primary">
           <CardHeader>
             <CardTitle>Featured projects</CardTitle>
             <CardDescription>
@@ -84,7 +84,7 @@ export function ResearchAreaPage() {
             {area.featuredProjects.map((project) => (
               <div
                 key={project.name}
-                className="rounded-lg border border-border/80 bg-muted/20 p-4 transition-transform duration-300 hover:-translate-y-1 hover:border-primary/40"
+                className="feature-box-muted"
               >
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="text-lg font-semibold text-foreground">{project.name}</h3>
@@ -109,7 +109,7 @@ export function ResearchAreaPage() {
           {...scrollFadeIn}
           transition={{ ...scrollFadeIn.transition, delay: 0.1 }}
         >
-          <Card className="transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+          <Card className="card-hover-primary">
           <CardHeader>
             <CardTitle>Collaborator network</CardTitle>
             <CardDescription>
@@ -121,7 +121,7 @@ export function ResearchAreaPage() {
               {area.collaborators.map((partner) => (
                 <li
                   key={partner}
-                  className="rounded-md border border-dashed border-border bg-background px-4 py-3 transition-transform duration-300 hover:-translate-y-1"
+                  className="feature-box-dashed"
                 >
                   {partner}
                 </li>

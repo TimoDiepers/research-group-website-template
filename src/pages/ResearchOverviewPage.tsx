@@ -42,7 +42,7 @@ export function ResearchOverviewPage() {
             key={area.slug}
             {...cardAnimation(index)}
           >
-            <Card className="overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+            <Card className="overflow-hidden card-hover-primary">
               <CardHeader className="bg-gradient-to-br from-primary/10 via-background to-background">
                 <Badge variant="outline" className="w-fit">
                   {area.tagline}
@@ -59,7 +59,7 @@ export function ResearchOverviewPage() {
                     {area.highlights.map((highlight) => (
                       <li
                         key={highlight}
-                        className="flex gap-3 rounded-lg border border-border/80 bg-background/80 p-4 transition-transform duration-300 hover:-translate-y-1 hover:border-primary/40"
+                        className="flex gap-3 feature-box-muted"
                       >
                         <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
                         <span>{highlight}</span>
@@ -75,7 +75,7 @@ export function ResearchOverviewPage() {
                     {area.collaborators.map((partner) => (
                       <li
                         key={partner}
-                        className="rounded-md border border-dashed border-border/80 bg-muted/30 px-4 py-3 transition-transform duration-300 hover:-translate-y-1"
+                        className="feature-box-dashed"
                       >
                         {partner}
                       </li>
@@ -127,7 +127,7 @@ export function ResearchOverviewPage() {
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.1 }}
             >
-              <Card className="h-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+              <Card className="h-full card-hover-primary">
                 <CardHeader>
                   <div className="mb-2 flex items-center gap-2">
                     <Badge variant="secondary" className="text-xs">

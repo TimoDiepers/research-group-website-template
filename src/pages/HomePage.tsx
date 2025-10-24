@@ -151,7 +151,7 @@ export function HomePage() {
               key={area.slug}
               {...cardAnimation(index)}
             >
-              <Card className="group relative overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
+              <Card className="group relative overflow-hidden card-hover-primary">
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
                 <CardHeader>
                   <CardTitle>{area.title}</CardTitle>
@@ -195,16 +195,16 @@ export function HomePage() {
               Our structures for co-design and responsible deployment make collaboration frictionless.
             </p>
             <div className="grid gap-3 text-sm text-muted-foreground sm:grid-cols-2">
-              <div className="rounded-lg border border-border bg-background p-4 transition-transform duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-soft/70">
+              <div className="feature-box">
                 Embedded residencies with domain partners
               </div>
-              <div className="rounded-lg border border-border bg-background p-4 transition-transform duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-soft/70">
+              <div className="feature-box">
                 Open-source toolkits with comprehensive governance
               </div>
-              <div className="rounded-lg border border-border bg-background p-4 transition-transform duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-soft/70">
+              <div className="feature-box">
                 Policy sandboxes for rapid experimentation
               </div>
-              <div className="rounded-lg border border-border bg-background p-4 transition-transform duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-soft/70">
+              <div className="feature-box">
                 Shared datasets with embedded stewardship
               </div>
             </div>
@@ -213,7 +213,7 @@ export function HomePage() {
             {...slideFromRight}
             transition={{ ...slideFromRight.transition, delay: 0.1 }}
           >
-            <Card className="shadow-soft transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft/80">
+            <Card className="shadow-soft card-hover-subtle">
               <CardHeader>
                 <CardTitle>Partner with us</CardTitle>
                 <CardDescription>

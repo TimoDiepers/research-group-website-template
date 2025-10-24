@@ -44,31 +44,6 @@
 }
 
 :root {
-  /* RWTH Color Palette */
-  --rwth-blau-100: #00549f;
-  --rwth-blau-75: #407fb7;
-  --rwth-blau-50: #8ebae5;
-  --rwth-blau-25: #c7ddf2;
-  --rwth-blau-10: #e8f1fa;
-
-  --rwth-schwarz-100: #000000;
-  --rwth-schwarz-75: #646567;
-  --rwth-schwarz-50: #9c9e9f;
-  --rwth-schwarz-25: #cfd1d2;
-  --rwth-schwarz-10: #eceded;
-
-  --rwth-tuerkis-100: #0098a1;
-  --rwth-tuerkis-75: #00b1b7;
-  --rwth-tuerkis-50: #89cccf;
-  --rwth-tuerkis-25: #cae7e7;
-  --rwth-tuerkis-10: #ebf6f6;
-
-  --rwth-rot-100: #cc071e;
-  --rwth-rot-75: #d85c41;
-  --rwth-rot-50: #e69679;
-  --rwth-rot-25: #f3cdbb;
-  --rwth-rot-10: #faebe3;
-
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -77,7 +52,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   /* Primary color: RWTH Blue 100 (#00549f) */
-  --primary: oklch(0.395 0.106 248.03);
+  --primary: oklch(0.4476 0.1399 253.43);
   --primary-foreground: oklch(0.985 0 0);
   /* Secondary: Light neutral gray */
   --secondary: oklch(0.97 0 0);
@@ -86,7 +61,7 @@
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   /* Accent: RWTH Tuerkis for subtle highlights */
-  --accent: oklch(0.655 0.056 210.96);
+  --accent: oklch(0.6188 0.1053 202.22);
   --accent-foreground: oklch(1 0 0);
   /* Destructive: RWTH Red */
   --destructive: oklch(0.508 0.198 24.67);
@@ -116,14 +91,14 @@
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
   /* Primary in dark mode: Lighter RWTH Blue (75%) for better contrast */
-  --primary: oklch(0.588 0.086 248.73);
+  --primary: oklch(0.58 0.1083 247.69);
   --primary-foreground: oklch(0.145 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
   /* Accent in dark mode: Lighter RWTH Tuerkis */
-  --accent: oklch(0.755 0.044 210.96);
+  --accent: oklch(0.8016 0.0678 199.46);
   --accent-foreground: oklch(0.145 0 0);
   /* Destructive: Lighter RWTH Red for dark mode */
   --destructive: oklch(0.704 0.156 24.67);

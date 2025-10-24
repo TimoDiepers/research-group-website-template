@@ -79,15 +79,20 @@ export function HomePage() {
             </Button>
           </div>
           <div className="grid grid-cols-1 gap-4 border-t border-dashed border-border pt-6 sm:grid-cols-3">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                {...staggerItemAnimation(index)}
-              >
-                <p className="text-3xl font-semibold text-foreground">{stat.value}</p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
-              </motion.div>
-            ))}
+            {stats.map((stat, index) => {
+              const staggerAnim = staggerItemAnimation(index)
+              return (
+                <motion.div
+                  key={stat.label}
+                  initial={staggerAnim.initial}
+                  animate={heroReady ? staggerAnim.animate : staggerAnim.initial}
+                  transition={staggerAnim.transition}
+                >
+                  <p className="text-3xl font-semibold text-foreground">{stat.value}</p>
+                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
         <motion.div

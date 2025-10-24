@@ -6,6 +6,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { Badge } from '../components/ui/badge'
 import { Avatar, AvatarFallback } from '../components/ui/avatar'
 import { Button } from '../components/ui/button'
+import {
+  heroAnimations,
+  scrollFadeIn,
+  cardAnimation,
+  sectionAnimation,
+} from '../lib/animations'
 
 function TeamGrid({
   title,
@@ -19,10 +25,7 @@ function TeamGrid({
   return (
     <motion.section
       className="space-y-6"
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      {...sectionAnimation}
     >
       <div>
         <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
@@ -32,10 +35,7 @@ function TeamGrid({
         {members.map((member, index) => (
           <motion.div
             key={member.name}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.04 }}
+            {...cardAnimation(index)}
           >
             <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
               <CardContent className="flex h-full flex-col gap-4 p-6">
@@ -80,9 +80,9 @@ export function TeamPage() {
     <div className="bg-muted/20 pb-20">
       <motion.section
         className="container space-y-6 pt-16"
-        initial={{ opacity: 0, y: 32 }}
-        animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        initial={heroAnimations.initial}
+        animate={heroReady ? heroAnimations.animate : heroAnimations.initial}
+        transition={heroAnimations.transition}
       >
         <Badge variant="accent" className="uppercase tracking-wide">
           Team
@@ -98,10 +98,7 @@ export function TeamPage() {
 
       <section className="container mt-12 grid gap-6 md:grid-cols-[0.8fr_1.2fr]">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          {...scrollFadeIn}
         >
           <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
           <CardHeader>
@@ -132,10 +129,8 @@ export function TeamPage() {
           </Card>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.35 }}
-          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+          {...scrollFadeIn}
+          transition={{ ...scrollFadeIn.transition, delay: 0.1 }}
         >
           <Card className="h-full transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
           <CardHeader>
@@ -162,10 +157,7 @@ export function TeamPage() {
       <motion.section
         id="openings"
         className="container mt-12"
-        initial={{ opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-        transition={{ duration: 0.65, ease: 'easeOut' }}
+        {...scrollFadeIn}
       >
         <Card className="border-dashed border-primary/50 bg-primary/5 transition-transform duration-300 hover:-translate-y-1.5 hover:shadow-soft">
           <CardContent className="flex flex-col gap-6 p-8 md:flex-row md:items-center md:justify-between">
@@ -197,10 +189,7 @@ export function TeamPage() {
 
       <motion.section
         className="container mt-16 space-y-16"
-        initial={{ opacity: 0, y: 36 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.35 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        {...sectionAnimation}
       >
         <TeamGrid
           title="Faculty leadership"

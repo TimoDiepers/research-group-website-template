@@ -7,6 +7,7 @@ import { publications } from '../data/publications'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { Button } from '../components/ui/button'
+import { heroAnimations, cardAnimation } from '../lib/animations'
 
 export function ResearchOverviewPage() {
   const [heroReady, setHeroReady] = useState(false)
@@ -19,9 +20,9 @@ export function ResearchOverviewPage() {
     <div className="container py-16">
       <motion.div
         className="space-y-4"
-        initial={{ opacity: 0, y: 24 }}
-        animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        initial={heroAnimations.initial}
+        animate={heroReady ? heroAnimations.animate : heroAnimations.initial}
+        transition={heroAnimations.transition}
       >
         <Badge variant="accent" className="uppercase tracking-wide">
           Research
@@ -39,10 +40,7 @@ export function ResearchOverviewPage() {
         {researchAreas.map((area, index) => (
           <motion.div
             key={area.slug}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.08 }}
+            {...cardAnimation(index)}
           >
             <Card className="overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
               <CardHeader className="bg-gradient-to-br from-primary/10 via-background to-background">

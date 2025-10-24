@@ -7,6 +7,15 @@ import { Button } from '../components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { Separator } from '../components/ui/separator'
+import {
+  heroAnimations,
+  staggerItemAnimation,
+  scrollFadeIn,
+  cardAnimation,
+  slideFromLeft,
+  slideFromRight,
+  hoverLift,
+} from '../lib/animations'
 
 const stats = [
   { label: 'Active collaborators', value: '34+' },
@@ -40,9 +49,9 @@ export function HomePage() {
     <div className="pb-16">
       <motion.section
         className="container flex flex-col gap-10 pb-12 pt-16 md:flex-row md:items-center"
-        initial={{ opacity: 0, y: 32 }}
-        animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        initial={heroAnimations.initial}
+        animate={heroReady ? heroAnimations.animate : heroAnimations.initial}
+        transition={heroAnimations.transition}
       >
         <div className="flex-1 space-y-6">
           <Badge variant="accent" className="w-fit uppercase tracking-wide">
@@ -70,25 +79,28 @@ export function HomePage() {
             </Button>
           </div>
           <div className="grid grid-cols-1 gap-4 border-t border-dashed border-border pt-6 sm:grid-cols-3">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 12 }}
-                animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 + index * 0.1 }}
-              >
-                <p className="text-3xl font-semibold text-foreground">{stat.value}</p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
-              </motion.div>
-            ))}
+            {stats.map((stat, index) => {
+              const staggerAnim = staggerItemAnimation(index)
+              return (
+                <motion.div
+                  key={stat.label}
+                  initial={staggerAnim.initial}
+                  animate={heroReady ? staggerAnim.animate : staggerAnim.initial}
+                  transition={staggerAnim.transition}
+                >
+                  <p className="text-3xl font-semibold text-foreground">{stat.value}</p>
+                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
         <motion.div
           className="flex flex-1 flex-col gap-4 rounded-lg border border-border bg-card/80 p-6 shadow-soft backdrop-blur hover:shadow-soft/80"
           initial={{ opacity: 0, y: 24 }}
           animate={heroReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          whileHover={{ y: -8 }}
-          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+          transition={{ ...heroAnimations.transition, delay: 0.1 }}
+          {...hoverLift}
         >
           <h2 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             <Sparkles className="h-4 w-4 text-accent" />
@@ -115,10 +127,7 @@ export function HomePage() {
       <section className="container py-16">
         <motion.div
           className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          {...scrollFadeIn}
         >
           <div>
             <Badge variant="outline">Research Programs</Badge>
@@ -140,10 +149,7 @@ export function HomePage() {
           {researchAreas.map((area, index) => (
             <motion.div
               key={area.slug}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.65, ease: 'easeOut', delay: index * 0.1 }}
+              {...cardAnimation(index)}
             >
               <Card className="group relative overflow-hidden transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft">
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
@@ -178,10 +184,7 @@ export function HomePage() {
         <div className="container grid gap-10 md:grid-cols-2 md:items-center">
           <motion.div
             className="space-y-4"
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            {...slideFromLeft}
           >
             <Badge variant="outline">Collaboration</Badge>
             <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
@@ -207,10 +210,8 @@ export function HomePage() {
             </div>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
+            {...slideFromRight}
+            transition={{ ...slideFromRight.transition, delay: 0.1 }}
           >
             <Card className="shadow-soft transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft/80">
               <CardHeader>

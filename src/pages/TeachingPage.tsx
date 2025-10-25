@@ -5,6 +5,7 @@ import { courses, outreach } from '../data/teaching'
 import { Badge } from '../components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion'
 import {
   heroAnimations,
   scrollFadeIn,
@@ -193,6 +194,60 @@ export function TeachingPage() {
             ))}
           </div>
         </div>
+      </motion.section>
+
+      <motion.section
+        className="container py-16"
+        {...sectionAnimation}
+      >
+        <div className="mb-8">
+          <Badge variant="outline">Frequently Asked Questions</Badge>
+          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-foreground">
+            Common questions about our programs
+          </h2>
+        </div>
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="item-1">
+            <AccordionTrigger className="text-left">
+              What are the prerequisites for your courses?
+            </AccordionTrigger>
+            <AccordionContent>
+              <p className="text-muted-foreground">
+                Prerequisites vary by course. Generally, undergraduate courses require basic programming skills (Python preferred) and familiarity with linear algebra and statistics. Graduate courses may require additional background in machine learning or related fields. Check individual course syllabi for specific requirements.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger className="text-left">
+              Can I audit a course or participate remotely?
+            </AccordionTrigger>
+            <AccordionContent>
+              <p className="text-muted-foreground">
+                We welcome auditors on a space-available basis. Some courses offer hybrid options with remote participation. Contact the teaching team early in the semester to discuss arrangements. Note that practicum components typically require in-person or synchronous engagement with partner organizations.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger className="text-left">
+              How do I get involved in research through coursework?
+            </AccordionTrigger>
+            <AccordionContent>
+              <p className="text-muted-foreground">
+                Many of our courses include research components where students can contribute to ongoing lab projects. High-performing students are often invited to continue their work as independent study projects or join research teams. We also host regular lab meetings and workshops where students can learn about current research directions.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-4">
+            <AccordionTrigger className="text-left">
+              What kinds of organizations do you partner with for practicum projects?
+            </AccordionTrigger>
+            <AccordionContent>
+              <p className="text-muted-foreground">
+                Our partners span healthcare systems, civic organizations, government agencies, and industry research labs. Projects are selected to provide real-world impact while aligning with course learning objectives. Students work in teams and receive mentorship from both lab members and domain experts at partner organizations.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </motion.section>
     </div>
   )

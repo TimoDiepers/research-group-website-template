@@ -7,6 +7,7 @@ import { Badge } from '../components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button'
 import { Separator } from '../components/ui/separator'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/ui/breadcrumb'
 import { heroAnimations, scrollFadeIn } from '../lib/animations'
 
 export function ResearchAreaPage() {
@@ -30,6 +31,21 @@ export function ResearchAreaPage() {
         animate={heroReady ? heroAnimations.animate : heroAnimations.initial}
         transition={heroAnimations.transition}
       >
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <Link to="/" className="transition-colors hover:text-foreground">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <Link to="/research" className="transition-colors hover:text-foreground">Research</Link>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{area.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <Button variant="ghost" className="w-fit px-0" asChild>
           <Link to="/research">
             <ArrowLeft className="mr-2 h-4 w-4" />

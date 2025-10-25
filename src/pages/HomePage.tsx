@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrowRight, ArrowUpRight, BookOpen, Sparkles } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, BookOpen, Sparkles, Info } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { researchAreas } from '../data/research'
@@ -7,6 +7,7 @@ import { Button } from '../components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { Separator } from '../components/ui/separator'
+import { Alert, AlertDescription, AlertTitle } from '../components/ui/alert'
 import {
   heroAnimations,
   staggerItemAnimation,
@@ -47,8 +48,21 @@ export function HomePage() {
 
   return (
     <div className="pb-16">
+      <div className="container pt-8">
+        <Alert className="border-primary/40 bg-primary/5">
+          <Info className="h-4 w-4" />
+          <AlertTitle>Applications Open</AlertTitle>
+          <AlertDescription>
+            We're now accepting applications for our 2025 Summer Scholars Program and Civic Labs Fellowship. Learn more on the{' '}
+            <Link to="/teaching" className="font-medium underline underline-offset-4 hover:text-primary">
+              Teaching page
+            </Link>
+            .
+          </AlertDescription>
+        </Alert>
+      </div>
       <motion.section
-        className="container flex flex-col gap-10 pb-12 pt-16 md:flex-row md:items-center"
+        className="container flex flex-col gap-10 pb-12 pt-8 md:flex-row md:items-center"
         initial={heroAnimations.initial}
         animate={heroReady ? heroAnimations.animate : heroAnimations.initial}
         transition={heroAnimations.transition}
